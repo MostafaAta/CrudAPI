@@ -87,8 +87,8 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public boolean deleteById(Long id)
 	{
-		Employee user = employeeRepo.findById(id).get();
-		if (user != null)
+		Employee employee = employeeRepo.findById(id).get();
+		if (employee != null)
 		{
 			employeeRepo.delete(this.employeeRepo.findById(id).get());
 			return true;
@@ -103,20 +103,20 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public EmployeeDTO findByCode(String code)
 	{
-		Employee user = employeeRepo.findByCode(code);
-		return (user == null) ? null : convertToDto(user);
+		Employee employee = employeeRepo.findByCode(code);
+		return (employee == null) ? null : convertToDto(employee);
 	}
 
-	public EmployeeDTO convertToDto(Employee user)
+	public EmployeeDTO convertToDto(Employee employee)
 	{
-		EmployeeDTO EmployeeDTO = modelMapper.map(user, EmployeeDTO.class);
+		EmployeeDTO EmployeeDTO = modelMapper.map(employee, EmployeeDTO.class);
 		return EmployeeDTO;
 	}
 
 	public Employee convertToEntity(EmployeeDTO EmployeeDTO)
 	{
-		Employee user = modelMapper.map(EmployeeDTO, Employee.class);
-		return user;
+		Employee employee = modelMapper.map(EmployeeDTO, Employee.class);
+		return employee;
 	}
 
 }
