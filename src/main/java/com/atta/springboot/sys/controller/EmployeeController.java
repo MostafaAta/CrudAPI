@@ -57,14 +57,13 @@ public class EmployeeController
 		}
 		catch (NoSuchElementException ex)
 		{
-			throw new NotFoundException(String.format("Record Not Found With Id  [" + code + "]"));
+			throw new NotFoundException(String.format("Record Not Found With Code  [" + code + "]"));
 		}
 
 	}
 
 	@PostMapping("/addEmployee")
-	public ResponseEntity<EmployeeDTO> addEmployee(@Valid @RequestBody EmployeeDTO EmployeeDTO, Errors errors)
-			throws ConflictException, CustomValidationException, ConstraintViolationException, Exception
+	public ResponseEntity<EmployeeDTO> addEmployee(@Valid @RequestBody EmployeeDTO EmployeeDTO, Errors errors) throws Exception
 	{
 		if (errors.hasErrors())
 		{
@@ -76,8 +75,8 @@ public class EmployeeController
 		}
 		try
 		{
-			EmployeeDTO user = employeeService.save(EmployeeDTO);
-			return new ResponseEntity<>(user, HttpStatus.CREATED);
+			EmployeeDTO employee = employeeService.save(EmployeeDTO);
+			return new ResponseEntity<>(employee, HttpStatus.CREATED);
 		}
 		catch (ConstraintViolationException ex)
 		{
